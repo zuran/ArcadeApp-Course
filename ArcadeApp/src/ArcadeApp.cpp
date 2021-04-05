@@ -4,8 +4,14 @@
 #include <iostream>
 #include "Vec2D.h"
 
+using namespace std;
+
 int main()
 {
-    Vec2D aVec;
-    std::cout << aVec << std::endl;
+    Vec2D aVec(0,10);
+    Vec2D bVec(5, -1);
+
+    cout << bVec.Reflect(aVec);
+
+    return 0;
 }
