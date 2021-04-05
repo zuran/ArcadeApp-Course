@@ -1,1 +1,3 @@
-﻿
+﻿  ArcadeApp.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe

@@ -72,7 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Utils;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics;C:\Users\Stephen\source\repos\ArcadeApp\SDL2\include;C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Utils;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Stephen\source\repos\ArcadeApp\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -93,6 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -140,11 +142,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Graphics\ScreenBuffer.cpp" />
+    <ClCompile Include="src\Graphics\Color.cpp" />
+    <ClCompile Include="src\Utils\DynamicIntArray.cpp" />
     <ClCompile Include="src\ArcadeApp.cpp" />
     <ClCompile Include="src\Utils\Utils.cpp" />
     <ClCompile Include="src\Utils\Vec2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Graphics\ScreenBuffer.h" />
+    <ClInclude Include="src\Graphics\Color.h" />
+    <ClInclude Include="src\Utils\DynamicIntArray.h" />
     <ClInclude Include="src\Utils\Utils.h" />
     <ClInclude Include="src\Utils\Vec2D.h" />
   </ItemGroup>
