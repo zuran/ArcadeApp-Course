@@ -1,3 +1,14 @@
 ﻿  ArcadeApp.cpp
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(10,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(50,33): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(51,33): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(54,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(55,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(58,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(59,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(62,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(63,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(66,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\ArcadeApp.cpp(67,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe

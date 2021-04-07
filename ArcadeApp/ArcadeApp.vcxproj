@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics;C:\Users\Stephen\source\repos\ArcadeApp\SDL2\include;C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Utils;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Shapes;C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics;C:\Users\Stephen\source\repos\ArcadeApp\SDL2\include;C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Utils;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Stephen\source\repos\ArcadeApp\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -145,6 +145,7 @@
     <ClCompile Include="src\Graphics\Screen.cpp" />
     <ClCompile Include="src\Graphics\ScreenBuffer.cpp" />
     <ClCompile Include="src\Graphics\Color.cpp" />
+    <ClCompile Include="src\Shapes\Line2D.cpp" />
     <ClCompile Include="src\Utils\DynamicIntArray.cpp" />
     <ClCompile Include="src\ArcadeApp.cpp" />
     <ClCompile Include="src\Utils\Utils.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="src\Graphics\Screen.h" />
     <ClInclude Include="src\Graphics\ScreenBuffer.h" />
     <ClInclude Include="src\Graphics\Color.h" />
+    <ClInclude Include="src\Shapes\Line2D.h" />
     <ClInclude Include="src\Utils\DynamicIntArray.h" />
     <ClInclude Include="src\Utils\Utils.h" />
     <ClInclude Include="src\Utils\Vec2D.h" />
