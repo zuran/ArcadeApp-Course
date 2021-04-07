@@ -1,6 +1,7 @@
 #include "Screen.h"
 #include "Vec2D.h"
 #include "Line2D.h"
+#include "Star2D.h"
 #include <SDL.h>
 #include <cassert>
 #include <cmath>
@@ -135,6 +136,26 @@ void Screen::Draw(const Line2D& line, const Color& color)
             }
         }
     }
+}
+
+void Screen::Draw(const Star2D& star, const Color& color)
+{
+    float x = star.GetOrigin().GetX();
+    float y = star.GetOrigin().GetY();
+    float r = star.GetRadius();
+    float angle = star.GetAngle() - M_PI / 2;
+
+    Vec2D p [5];
+    for (int i = 0; i < 5; ++i, angle += M_PI / 2.5f)
+    {
+        p[i] = Vec2D(x + cosf(angle) * r, y + sinf(angle) * r);
+    }
+
+    Draw(Line2D(p[0], p[2]), color);
+    Draw(Line2D(p[1], p[3]), color);
+    Draw(Line2D(p[2], p[4]), color);
+    Draw(Line2D(p[3], p[0]), color);
+    Draw(Line2D(p[4], p[1]), color);
 }
 
 Screen& Screen::operator=(const Screen& screen)

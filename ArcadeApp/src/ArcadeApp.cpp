@@ -5,9 +5,10 @@
 #include <SDL.h>
 #include <cmath>
 
-#include "Color.h";
+#include "Color.h"
 #include "Screen.h"
-#include "Line2D.h";
+#include "Line2D.h"
+#include "Star2D.h"
 
 const int SCREEN_WIDTH = 224;
 const int SCREEN_HEIGHT = 288;
@@ -24,18 +25,8 @@ int main(int argc, char *args[])
     float inc = .0f;
     float cX = SCREEN_WIDTH / 2;
     float cY = SCREEN_HEIGHT / 2;
-    
-    
-    Line2D line;
-    Line2D line2;
-
-    for(;inc > -M_PI * 2; inc -= .01f) {
-
-    }
-    //Line2D line = {Vec2D(0, 0), Vec2D(SCREEN_WIDTH, SCREEN_HEIGHT)};
-    
-    //theScreen.Draw(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, Color::Yellow());
-    
+    Star2D star = Star2D(cX, cY, 0, radius);
+    bool isGrowing = true;
 
     SDL_Event sdlEvent;
     bool running = true;
@@ -46,32 +37,26 @@ int main(int argc, char *args[])
             SDL_Delay(10);
             SDL_PollEvent(&sdlEvent);
 
-            inc -= 0.02f;
-            float oX = cosf(inc + M_PI / 2.5f) * radius;
-            float oY = sinf(inc + M_PI / 2.5f) * radius;
-            Vec2D p1 = {oX + cX, oY + cY};
-
-            float oX2 = cosf(inc + 2 * M_PI / 2.5f) * radius;
-            float oY2 = sinf(inc + 2 * M_PI / 2.5f) * radius;
-            Vec2D p2 = { oX2 + cX, oY2 +cY};
-
-            float oX3 = cosf(inc + 3 * M_PI / 2.5f) * radius;
-            float oY3 = sinf(inc + 3 * M_PI / 2.5f) * radius;
-            Vec2D p3 = { oX3 + cX, oY3 + cY};
-
-            float oX4 = cosf(inc + 4 * M_PI / 2.5f) * radius;
-            float oY4 = sinf(inc + 4 * M_PI / 2.5f) * radius;
-            Vec2D p4 = { oX4 + cX, oY4 +cY};
-
-            float oX5 = cosf(inc + 5 * M_PI / 2.5f) * radius;
-            float oY5 = sinf(inc + 5 * M_PI / 2.5f) * radius;
-            Vec2D p5 = { oX5 + cX, oY5 + cY};
-
-            theScreen.Draw(Line2D(p1, p3), Color::Blue());
-            theScreen.Draw(Line2D(p2, p4), Color::Blue());
-            theScreen.Draw(Line2D(p3, p5), Color::Blue());
-            theScreen.Draw(Line2D(p4, p1), Color::Blue());
-            theScreen.Draw(Line2D(p5, p2), Color::Blue());
+            inc -= 0.01f;
+            theScreen.Draw(star, Color::Cyan());
+            star.SetAngle(inc);
+            if (radius >= cX)
+            {
+                isGrowing = false;
+            }
+            else if (radius <= 15.f)
+            {
+                isGrowing = true;
+            }
+            if (isGrowing)
+            {
+                radius += 1.f;
+            }
+            else
+            {
+                radius -= 1.f;
+            }
+            star.SetRadius(radius);
 
             //line = { Vec2D(cX - oX, cY - oY), Vec2D(cX + oX, cY + oY) };
             //theScreen.Draw(line, Color::Yellow());

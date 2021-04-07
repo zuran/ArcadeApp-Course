@@ -31,3 +31,10 @@
 *.out
 *.app
 .vs/ArcadeApp/v16/Browse.VC.opendb
+
+# Additional ignores
+.vs/ArcadeApp/v16/**
+Debug/
+*.vcxproj*
+.vs/
+ArcadeApp/Debug/
