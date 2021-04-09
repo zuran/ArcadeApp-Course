@@ -18,7 +18,7 @@ using namespace std;
 
 int main(int argc, char *args[])
 {
-    Screen theScreen;
+    /*Screen theScreen;
     theScreen.Init(SCREEN_WIDTH, SCREEN_HEIGHT, MAGNIFICATION);
     
     float radius = 15.f; //SCREEN_WIDTH / 2;
@@ -72,7 +72,7 @@ int main(int argc, char *args[])
             //    running = false;
             //    break;
             //}
-    }
+    }*/
 
     return 0;
 }
