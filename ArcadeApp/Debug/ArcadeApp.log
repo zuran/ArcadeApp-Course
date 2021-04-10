@@ -1,2 +1,4 @@
-﻿  ArcadeApp.cpp
+﻿  AARectangle.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Shapes\AARectangle.cpp(63,22): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Shapes\AARectangle.cpp(62,70): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
