@@ -1,4 +1,22 @@
-﻿  AARectangle.cpp
+﻿  Circle.cpp
+  AARectangle.cpp
 C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Shapes\AARectangle.cpp(63,22): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
 C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Shapes\AARectangle.cpp(62,70): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+  Screen.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(81,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(81,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(91,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(92,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(93,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(94,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(150,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(153,53): warning C4305: '+=': truncation from 'double' to 'float'
+  Line2D.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Shapes\Line2D.cpp(34,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Triangle.cpp
+  ArcadeApp.cpp
+  Utils.cpp
+  Vec2D.cpp
+  Star2D.cpp
+  Generating Code...
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe

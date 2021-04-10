@@ -2,6 +2,10 @@
 #include "Vec2D.h"
 #include "Line2D.h"
 #include "Star2D.h"
+#include "Triangle.h"
+#include "AARectangle.h"
+#include "Circle.h"
+#include "Utils.h"
 #include <SDL.h>
 #include <cassert>
 #include <cmath>
@@ -156,6 +160,44 @@ void Screen::Draw(const Star2D& star, const Color& color)
     Draw(Line2D(p[2], p[4]), color);
     Draw(Line2D(p[3], p[0]), color);
     Draw(Line2D(p[4], p[1]), color);
+}
+
+void Screen::Draw(const Triangle& triangle, const Color& color)
+{
+    auto p = triangle.GetPoints();
+    Draw(Line2D(p[0], p[1]), color);
+    Draw(Line2D(p[1], p[2]), color);
+    Draw(Line2D(p[2], p[0]), color);
+}
+
+void Screen::Draw(const AARectangle& rect, const Color& color)
+{
+    auto p = rect.GetPoints();
+    Draw(Line2D(p[0], p[1]), color);
+    Draw(Line2D(p[1], p[2]), color);
+    Draw(Line2D(p[2], p[3]), color);
+    Draw(Line2D(p[3], p[0]), color);
+}
+
+void Screen::Draw(const Circle& circle, const Color& color)
+{
+    static unsigned int NUM_CIRCLE_SEGMENTS = 30;
+
+    float angle = TWO_PI / float(NUM_CIRCLE_SEGMENTS);
+
+    Vec2D p0 = Vec2D(circle.GetCenterPoint().GetX() + circle.GetRadius(), circle.GetCenterPoint().GetY());
+    Vec2D p1 = p0;
+    Line2D nextLineToDraw;
+
+    for (unsigned int i = 0; i < NUM_CIRCLE_SEGMENTS; ++i)
+    {
+        p1.Rotate(angle, circle.GetCenterPoint());
+        nextLineToDraw.SetP1(p1);
+        nextLineToDraw.SetP0(p0);
+
+        Draw(nextLineToDraw, color);
+        p0 = p1;
+    }
 }
 
 Screen& Screen::operator=(const Screen& screen)
