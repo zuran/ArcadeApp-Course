@@ -47,9 +47,9 @@ int main(int argc, char *args[])
             
             inc -= 0.01f;
             theScreen.Draw(star, Color::Cyan());
-            theScreen.Draw(triangle, Color::Red());
-            theScreen.Draw(rect, Color::Blue());
-            theScreen.Draw(circle, Color::Orange());
+            theScreen.Draw(triangle, Color::Red(), true, Color::Red());
+            theScreen.Draw(rect, Color::Blue(), true, Color::Blue());
+            theScreen.Draw(circle, Color::Orange(), true, Color::Orange());
 
             star.SetAngle(inc);
             if (radius >= cX)
