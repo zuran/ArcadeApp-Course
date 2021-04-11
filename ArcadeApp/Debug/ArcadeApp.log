@@ -1,5 +1,5 @@
-﻿  ArcadeApp.cpp
-  Screen.cpp
+﻿  DynamicIntArray.cpp
+  ArcadeApp.cpp
   Star2D.cpp
   Generating Code...
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe

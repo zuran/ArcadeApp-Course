@@ -47,6 +47,34 @@ DynamicIntArray& DynamicIntArray::operator=(const DynamicIntArray& otherArray)
 	return *this;
 }
 
+DynamicIntArray::DynamicIntArray(DynamicIntArray&& otherArray) noexcept : 
+	moptrData(otherArray.moptrData), mSize(otherArray.mSize), mCapacity(otherArray.mCapacity)
+{
+	otherArray.moptrData = nullptr;
+	otherArray.mCapacity = 0;
+	otherArray.mSize = 0;
+}
+
+DynamicIntArray& DynamicIntArray::operator=(DynamicIntArray&& otherArray) noexcept
+{
+	if (this == &otherArray)
+	{
+		return *this;
+	}
+
+	delete [] moptrData;
+
+	moptrData = otherArray.moptrData;
+	mSize = otherArray.mSize;
+	mCapacity = otherArray.mSize;
+
+	otherArray.moptrData = nullptr;
+	otherArray.mCapacity = 0;
+	otherArray.mSize = 0;
+	
+	return *this;
+}
+
 bool DynamicIntArray::Init(size_t capacity)
 {
 	if (capacity == 0)

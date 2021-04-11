@@ -8,6 +8,9 @@ class DynamicIntArray
 
 		DynamicIntArray& operator=(const DynamicIntArray& otherArray);
 
+		DynamicIntArray(DynamicIntArray && otherArray) noexcept;
+		DynamicIntArray& operator=(DynamicIntArray && otherArray) noexcept;
+
 		inline size_t Size() const {return mSize;}
 		inline size_t Capacity() const {return mCapacity;}
 
