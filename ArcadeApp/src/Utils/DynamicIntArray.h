@@ -21,7 +21,7 @@ class DynamicIntArray
 		int& operator[](size_t index);
 
 	private:
-		int * moptrData;
+		int* moptrData;
 		size_t mSize;
 		size_t mCapacity;
 

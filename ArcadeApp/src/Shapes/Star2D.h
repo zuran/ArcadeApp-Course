@@ -20,6 +20,8 @@ public:
 
 	bool operator==(const Star2D& star) const;
 
+	static Star2D GetRandomStar(const Vec2D& origin, float minSize, float maxSize);
+
 private:
 	Vec2D mOrigin;
 	float mAngle;
