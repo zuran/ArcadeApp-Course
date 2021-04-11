@@ -13,6 +13,20 @@ Triangle::Triangle(const Vec2D& p0, const Vec2D& p1, const Vec2D& p2)
 	mPoints.push_back(p2);
 }
 
+void Triangle::MoveTo(const Vec2D& position)
+{
+	Vec2D center = GetCenterPoint();
+	// Get point offset from center
+	Vec2D p0o = mPoints[0] - center;
+	Vec2D p1o = mPoints[1] - center;
+	Vec2D p2o = mPoints[2] - center;
+
+	// Add point offset to new position
+	mPoints[0] = p0o + position;
+	mPoints[1] = p1o + position;
+	mPoints[2] = p2o + position;
+}
+
 Vec2D Triangle::GetCenterPoint() const
 {
 	return Vec2D((mPoints[0].GetX() + mPoints[1].GetX() + mPoints[2].GetX()) / 3.0f,

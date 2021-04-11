@@ -16,6 +16,8 @@ public:
 	inline Vec2D GetP1() const { return mPoints[1]; }
 	inline Vec2D GetP2() const { return mPoints[2]; }
 
+	virtual void MoveTo(const Vec2D& position) override;
+
 	Vec2D GetCenterPoint() const override;
 	
 	float Area() const;

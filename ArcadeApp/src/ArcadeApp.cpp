@@ -34,6 +34,9 @@ int main(int argc, char *args[])
     Triangle triangle = {Vec2D(60, 10), Vec2D(10, 110), Vec2D(110, 110)};
     AARectangle rect = {Vec2D(115, 115), 50, 30};
     Circle circle = {Vec2D(160, 160), 45};
+    triangle.MoveTo(Vec2D(cX, cY));
+    rect.MoveTo(Vec2D(cX, cY));
+    circle.MoveTo(Vec2D(cX, cY));
 
     SDL_Event sdlEvent;
     bool running = true;
