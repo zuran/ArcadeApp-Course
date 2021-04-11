@@ -13,6 +13,8 @@ class Color
 	static const SDL_PixelFormat* mFormat;
 	static void InitColorFormat(const SDL_PixelFormat * format);
 
+	static Color Evaluate1MinusSourceAlpha(const Color& source, const Color& destination);
+
 	inline static Color Black() {return Color(0, 0, 0);}
 	inline static Color White() {return Color(255, 255, 255);}
 	inline static Color Red() {return Color(255, 0, 0);}
@@ -26,8 +28,8 @@ class Color
 
 	Color(): Color(0){}
 	Color(uint32_t color): mColor(color){}
-	Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-	Color(uint8_t r, uint8_t g, uint8_t b) : Color(r, g, b, 255) {}
+	Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
+	//Color(uint8_t r, uint8_t g, uint8_t b) : Color(r, g, b, 255) {}
 
 	inline bool operator==(const Color& c) const {return mColor == c.mColor;}
 	inline bool operator!=(const Color& c) const {return !(*this == c);}

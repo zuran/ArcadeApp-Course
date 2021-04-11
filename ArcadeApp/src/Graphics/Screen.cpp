@@ -42,7 +42,8 @@ SDL_Window* Screen::Init(uint32_t w, uint32_t h, uint32_t mag)
     if (moptrWindow)
     {
         mnoptrWindowSurface = SDL_GetWindowSurface(moptrWindow);
-        SDL_PixelFormat* pixelFormat = mnoptrWindowSurface->format;
+        //SDL_PixelFormat* pixelFormat = mnoptrWindowSurface->format;
+        SDL_PixelFormat* pixelFormat = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888);
         Color::InitColorFormat(pixelFormat);
         mClearColor = Color::Black();
         mBackBuffer.Init(pixelFormat->format, mWidth, mHeight);
@@ -79,7 +80,7 @@ void Screen::Draw(const Vec2D& point, const Color& color)
     assert(moptrWindow);
     if (moptrWindow)
     {
-        mBackBuffer.SetPixel(color, point.GetX(), point.GetY());
+        mBackBuffer.SetPixel(color, int(point.GetX()), int(point.GetY()));
     }
 }
 
@@ -89,10 +90,10 @@ void Screen::Draw(const Line2D& line, const Color& color)
     if (moptrWindow)
     {
         int dx, dy;
-        int x0 = roundf(line.GetP0().GetX());
-        int y0 = roundf(line.GetP0().GetY());
-        int x1 = roundf(line.GetP1().GetX());
-        int y1 = roundf(line.GetP1().GetY());
+        int x0 = int(roundf(line.GetP0().GetX()));
+        int y0 = int(roundf(line.GetP0().GetY()));
+        int x1 = int(roundf(line.GetP1().GetX()));
+        int y1 = int(roundf(line.GetP1().GetY()));
 
         dx = x1 - x0;
         dy = y1 - y0;
@@ -148,10 +149,10 @@ void Screen::Draw(const Star2D& star, const Color& color)
     float x = star.GetOrigin().GetX();
     float y = star.GetOrigin().GetY();
     float r = star.GetRadius();
-    float angle = star.GetAngle() - M_PI / 2;
+    float angle = star.GetAngle() - float(M_PI) / 2;
 
     Vec2D p [5];
-    for (int i = 0; i < 5; ++i, angle += M_PI / 2.5f)
+    for (int i = 0; i < 5; ++i, angle += float(M_PI) / 2.5f)
     {
         p[i] = Vec2D(x + cosf(angle) * r, y + sinf(angle) * r);
     }
@@ -271,7 +272,7 @@ void Screen::FillPoly(const std::vector<Vec2D>& points, const Color& color)
             }
         }
 
-        for (int pixelY = top; pixelY < bottom; ++pixelY)
+        for (int pixelY = int(top); pixelY < bottom; ++pixelY)
         {
             std::vector<float> nodeXVec;
             size_t j = points.size() - 1;
@@ -320,7 +321,7 @@ void Screen::FillPoly(const std::vector<Vec2D>& points, const Color& color)
                     //Line2D line = {Vec2D(nodeXVec[k], pixelY), Vec2D(nodeXVec[k+1], pixelY)};
                     //Draw(line, color);
 
-                    for (int pixelX = nodeXVec[k]; pixelX < nodeXVec[k + 1]; ++pixelX)
+                    for (int pixelX = int(nodeXVec[k]); pixelX < nodeXVec[k + 1]; ++pixelX)
                     {
                         Draw(pixelX, pixelY, color);
                     }

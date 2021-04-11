@@ -49,7 +49,7 @@ int main(int argc, char *args[])
             theScreen.Draw(star, Color::Cyan());
             theScreen.Draw(triangle, Color::Red(), true, Color::Red());
             theScreen.Draw(rect, Color::Blue(), true, Color::Blue());
-            theScreen.Draw(circle, Color::Orange(), true, Color::Orange());
+            theScreen.Draw(circle, Color(0, 255, 0, 150), true, Color(0, 255, 0, 150));
 
             star.SetAngle(inc);
             if (radius >= cX)

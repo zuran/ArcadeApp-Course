@@ -31,7 +31,7 @@ Vec2D Line2D::ClosestPoint(const Vec2D& p, bool limitToSegment) const
 
 	if (limitToSegment)
 	{
-		t = std::fmax(0, std::fmin(1.0f, t));
+		t = float(std::fmax(0, std::fmin(1.0f, t)));
 	}
 
 	return mP0 + p0ToP1 * t;

@@ -1,18 +1,9 @@
 ﻿  ArcadeApp.cpp
+  Color.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Color.cpp(20,23): warning C4244: 'argument': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Color.cpp(21,25): warning C4244: 'argument': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Color.cpp(22,24): warning C4244: 'argument': conversion from 'float' to 'uint8_t', possible loss of data
   Screen.cpp
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(82,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(82,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(92,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(93,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(94,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(95,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(151,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(154,53): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(274,25): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(323,37): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
+  ScreenBuffer.cpp
   Generating Code...
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
