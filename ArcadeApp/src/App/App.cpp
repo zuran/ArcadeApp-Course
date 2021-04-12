@@ -1,11 +1,8 @@
 #include "App.h"
 #include <SDL.h>
 #include <iostream>
-#include "Line2D.h"
-#include "AARectangle.h"
-#include "Triangle.h"
-#include "Circle.h"
-#include "Color.h"
+#include "ArcadeScene.h"
+#include <cassert>
 
 App& App::Singleton()
 {
@@ -16,6 +13,9 @@ App& App::Singleton()
 bool App::Init(uint32_t width, uint32_t height, uint32_t mag)
 {
 	mnoptrWindow = mScreen.Init(width, height, mag);
+	std::unique_ptr<ArcadeScene> arcadeScene = std::make_unique<ArcadeScene>();
+	PushScene(std::move(arcadeScene));
+
 	return mnoptrWindow != nullptr;
 }
 
@@ -28,13 +28,6 @@ void App::Run()
 
 	int cX = mScreen.Width() / 2, cY = mScreen.Height() / 2;
 
-	Triangle triangle = { Vec2D(60, 10), Vec2D(10, 110), Vec2D(110, 110) };
-	AARectangle rect = { Vec2D(115, 115), 50, 30 };
-	Circle circle = { Vec2D(160, 160), 45 };
-	triangle.MoveTo(Vec2D(cX, cY));
-	rect.MoveTo(Vec2D(cX, cY));
-	circle.MoveTo(Vec2D(cX, cY));
-
 	SDL_Event sdlEvent;
 	bool running = true;
 
@@ -43,6 +36,10 @@ void App::Run()
 
 	uint32_t dt = 10;
 	uint32_t accumulator = 0;
+
+	mInputController.Init([&running](uint32_t dt, InputState state) {
+		running = false;
+	});
 
 	while (running)
 	{
@@ -58,30 +55,58 @@ void App::Run()
 		accumulator += frameTime;
 
 		// Input
-		while (SDL_PollEvent(&sdlEvent))
+		mInputController.Update(dt);
+
+		Scene* topScene = TopScene();
+		assert(topScene && "Scene stack is empty");
+		if (topScene)
 		{
-			switch (sdlEvent.type)
+			// Update
+			while (accumulator >= dt)
 			{
-				case SDL_QUIT:
-					running = false;
-					break;
+				// Update current scene by dt
+				topScene->Update(dt);
+				accumulator -= dt;
 			}
+
+			// Render
+			topScene->Draw(mScreen);
 		}
-
-		// Update
-		while (accumulator >= dt)
-		{
-			// Update current scene by dt
-
-			std::cout << "Delta time step: " << dt << std::endl;
-			accumulator -= dt;
-		}
-
-		// Render
-		mScreen.Draw(triangle, Color::Red(), true, Color::Red());
-		mScreen.Draw(rect, Color::Blue(), true, Color::Blue());
-		mScreen.Draw(circle, Color(0, 255, 0, 150), true, Color(0, 255, 0, 150));
 		mScreen.SwapScreens();
-
 	}
+}
+
+void App::PushScene(std::unique_ptr<Scene> scene)
+{
+	assert(scene && "Don't push nullptr");
+	if(scene) {
+		scene->Init();
+		mInputController.SetGameController(scene->GetGameController());
+		mSceneStack.emplace_back(std::move(scene));
+		SDL_SetWindowTitle(mnoptrWindow, TopScene()->GetSceneName().c_str());
+	}
+}
+
+void App::PopScene()
+{
+	if (mSceneStack.size() > 1)
+	{
+		mSceneStack.pop_back();
+	}
+
+	if (TopScene())
+	{
+		mInputController.SetGameController(TopScene()->GetGameController());
+		SDL_SetWindowTitle(mnoptrWindow, TopScene()->GetSceneName().c_str());
+	}
+}
+
+Scene* App::TopScene()
+{
+	if (mSceneStack.empty())
+	{
+		return nullptr;
+	}
+
+	return mSceneStack.back().get();
 }
