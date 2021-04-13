@@ -2,7 +2,7 @@
 
 #include "InputAction.h"
 
-struct GameController;
+class GameController;
 
 class InputController
 {

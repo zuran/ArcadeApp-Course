@@ -28,7 +28,6 @@ void App::Run()
 
 	int cX = mScreen.Width() / 2, cY = mScreen.Height() / 2;
 
-	SDL_Event sdlEvent;
 	bool running = true;
 
 	uint32_t lastTick = SDL_GetTicks();
