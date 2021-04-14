@@ -3,6 +3,7 @@
 #include "Excluder.h"
 
 class Screen;
+class Ball;
 
 enum PaddleDirection
 {
@@ -17,8 +18,9 @@ public:
 	static const uint32_t PADDLE_HEIGHT = 10;
 
 	void Init(const AARectangle& rect, const AARectangle& boundary);
-	void Update(uint32_t dt);
+	void Update(uint32_t dt, Ball& ball);
 	void Draw(Screen& screen);
+	bool Bounce(Ball& ball);
 	inline bool IsMovingLeft() const { return mDirection == PaddleDirection::LEFT; }
 	inline bool IsMovingRight() const { return mDirection == PaddleDirection::RIGHT; }
 
@@ -30,4 +32,5 @@ private:
 	uint32_t mDirection;
 	AARectangle mBoundary;
 	const float VELOCITY = 100.f; // pixels/sec
+	const float CORNER_BOUNCE_AMT = 0.2f;
 };
