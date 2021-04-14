@@ -1,6 +1,4 @@
-﻿  GameScene.cpp
-  FileCommandLoader.cpp
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Utils\FileCommandLoader.cpp(108,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Utils\FileCommandLoader.cpp(108,15): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  App.cpp
+  BreakOut.cpp
   Generating Code...
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
