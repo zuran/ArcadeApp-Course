@@ -15,3 +15,8 @@ bool IsLessThanOrEqual(float x, float y)
 {
 	return x < y || IsEqual(x, y);
 }
+
+float MillisecondsToSeconds(unsigned int milliseconds)
+{
+	return static_cast<float>(milliseconds) / 1000.f;
+}

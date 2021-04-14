@@ -1,2 +1,3 @@
-﻿  Excluder.cpp
+﻿  Paddle.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\Paddle.cpp(19,64): warning C4806: '==': unsafe operation: no value of type 'bool' promoted to type 'PaddleDirection' can equal the given constant
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe

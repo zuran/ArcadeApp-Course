@@ -84,7 +84,7 @@ int main(int argc, char *args[])
     SortStars(stars);
     DrawStars(stars);*/
 
-    if(App::Singleton().Init(SCREEN_WIDTH, SCREEN_HEIGHT, MAGNIFICATION));
+    if(App::Singleton().Init(SCREEN_WIDTH, SCREEN_HEIGHT, MAGNIFICATION))
     {
         App::Singleton().Run();
     }
