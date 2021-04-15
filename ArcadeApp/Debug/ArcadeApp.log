@@ -1,2 +1,4 @@
-﻿  Block.cpp
+﻿  BreakoutGameLevel.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\BreakoutGameLevel.cpp(84,15): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\BreakoutGameLevel.cpp(94,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
