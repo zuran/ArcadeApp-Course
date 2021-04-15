@@ -118,3 +118,9 @@ Scene* App::TopScene()
 
 	return mSceneStack.back().get();
 }
+
+const std::string& App::GetBasePath()
+{
+	static std::string basePath = SDL_GetBasePath();
+	return basePath;
+}

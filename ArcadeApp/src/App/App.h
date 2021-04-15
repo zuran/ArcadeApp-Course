@@ -23,6 +23,8 @@ public:
 	void PopScene();
 	Scene* TopScene(); // Peek
 
+	static const std::string& GetBasePath();
+
 private:
 	Screen mScreen;
 	SDL_Window* mnoptrWindow;

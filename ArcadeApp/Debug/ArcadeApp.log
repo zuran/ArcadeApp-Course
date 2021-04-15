@@ -1,4 +1,5 @@
-﻿  BreakoutGameLevel.cpp
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\BreakoutGameLevel.cpp(84,15): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\BreakoutGameLevel.cpp(94,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  BreakOut.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\BreakOut.cpp(83,29): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\BreakOut.cpp(82,61): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\BreakOut.cpp(89,45): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
