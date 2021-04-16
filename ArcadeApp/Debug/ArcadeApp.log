@@ -1,5 +1,2 @@
-﻿  BreakOut.cpp
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\BreakOut.cpp(83,29): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\BreakOut.cpp(82,61): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\BreakOut\BreakOut.cpp(89,45): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
+﻿  ArcadeScene.cpp
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe

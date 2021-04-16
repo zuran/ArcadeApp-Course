@@ -6,6 +6,7 @@
 #include "Color.h"
 #include "GameController.h"
 #include <iostream>
+#include "App.h"
 
 ArcadeScene::ArcadeScene()
 {
@@ -13,6 +14,8 @@ ArcadeScene::ArcadeScene()
 
 void ArcadeScene::Init()
 {
+	mTempSS.Load("ArcadeFont");
+
 	ButtonAction action;
 	action.key = GameController::ActionKey();
 	action.action = [](uint32_t dt, InputState state)
@@ -46,13 +49,7 @@ void ArcadeScene::Update(uint32_t dt)
 
 void ArcadeScene::Draw(Screen& theScreen)
 {
-	Triangle triangle = { Vec2D(60, 10), Vec2D(10, 110), Vec2D(110, 110) };
-	AARectangle rect = { Vec2D(115, 115), 50, 30 };
-	Circle circle = { Vec2D(160, 160), 45 };
-
-	theScreen.Draw(triangle, Color::Red(), true, Color::Red());
-	theScreen.Draw(rect, Color::Blue(), true, Color::Blue());
-	theScreen.Draw(circle, Color(0, 255, 0, 150), true, Color(0, 255, 0, 150));
+	theScreen.Draw(mTempSS, "0", Vec2D::Zero);
 }
 
 const std::string& ArcadeScene::GetSceneName() const
