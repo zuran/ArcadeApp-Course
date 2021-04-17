@@ -2,7 +2,6 @@
 
 #include "Scene.h"
 #include <memory>
-#include "SpriteSheet.h"
 
 enum eGame
 {
@@ -26,5 +25,4 @@ public:
 
 private:
 	std::unique_ptr<Scene> GetScene(eGame game);
-	SpriteSheet mTempSS;
 };

@@ -12,6 +12,7 @@
 #include <algorithm>
 #include "BmpImage.h"
 #include "SpriteSheet.h"
+#include "BitmapFont.h"
 
 Screen::Screen(): mWidth(0), mHeight(0), mnoptrWindowSurface(nullptr), moptrWindow(nullptr)
 {
@@ -172,7 +173,7 @@ void Screen::Draw(const Triangle& triangle, const Color& color, bool fill, const
     
     if (fill)
     {
-        FillPoly(p, fillColor);
+        FillPoly(p, [fillColor](uint32_t x, uint32_t y) { return fillColor; });
     }
 
     Draw(Line2D(p[0], p[1]), color);
@@ -186,7 +187,7 @@ void Screen::Draw(const AARectangle& rect, const Color& color, bool fill, const 
 
     if (fill)
     {
-        FillPoly(p, fillColor);
+        FillPoly(p, [fillColor](uint32_t x, uint32_t y) { return fillColor; });
     }
 
     Draw(Line2D(p[0], p[1]), color);
@@ -222,7 +223,9 @@ void Screen::Draw(const Circle& circle, const Color& color, bool fill, const Col
 
     if (fill)
     {
-        FillPoly(circlePoints, fillColor);
+        FillPoly(circlePoints, [fillColor](uint32_t x, uint32_t y) {
+            return fillColor;
+        });
     }
 
     for (const Line2D& line : lines)
@@ -231,23 +234,76 @@ void Screen::Draw(const Circle& circle, const Color& color, bool fill, const Col
     }
 }
 
-void Screen::Draw(const SpriteSheet& ss, const std::string& spriteName, const Vec2D& pos)
+void Screen::Draw(const SpriteSheet& ss, const std::string& spriteName, const Vec2D& pos, const Color& overlayColor)
 {
-    Draw(ss.GetBmpImage(), ss.GetSprite(spriteName), pos);
+    Draw(ss.GetBmpImage(), ss.GetSprite(spriteName), pos, overlayColor);
 }
 
-void Screen::Draw(const BmpImage& image, const Sprite& sprite, const Vec2D& pos)
+void Screen::Draw(const BitmapFont& font, const std::string& textLine, const Vec2D& pos, const Color& overlayColor)
 {
+    uint32_t x = pos.GetX();
+    
+    const SpriteSheet& ss = font.GetSpriteSheet();
+    for (char c : textLine)
+    {
+        if (c == ' ')
+        {
+            x += font.GetFontSpacingBetweenWords();
+            continue;
+        }
+
+        Sprite sprite = ss.GetSprite(std::string("") + c);
+        Draw(ss.GetBmpImage(), sprite, Vec2D(x, pos.GetY()), overlayColor);
+        x += sprite.width;
+        x += font.GetFontSpacingBetweenLetters();
+    }
+}
+
+void Screen::Draw(const BmpImage& image, const Sprite& sprite, const Vec2D& pos, const Color& overlayColor)
+{
+    float rVal = static_cast<float>(overlayColor.GetRed()) / 255.0f;
+    float gVal = static_cast<float>(overlayColor.GetGreen()) / 255.0f;
+    float bVal = static_cast<float>(overlayColor.GetBlue()) / 255.0f;
+    float aVal = static_cast<float>(overlayColor.GetAlpha()) / 255.0f;
+
     uint32_t width = sprite.width;
     uint32_t height = sprite.height;
 
-    for (uint32_t r = 0; r < height; ++r)
-    {
-        for (uint32_t c = 0; c < width; ++c)
-        {
-            Draw(c + pos.GetX(), r + pos.GetY(), image.GetPixels()[GetIndex(image.GetWidth(), r + sprite.yPos, c + sprite.xPos)]);
-        }
-    }
+    const std::vector<Color>& pixels = image.GetPixels();
+    auto topLeft = pos;
+    auto topRight = pos + Vec2D(width, 0);
+    auto bottomLeft = pos + Vec2D(0, height);
+    auto bottomRight = pos + Vec2D(width, height);
+
+    std::vector<Vec2D> points = {topLeft, bottomLeft, bottomRight, topRight};
+    Vec2D xAxis = topRight - topLeft;
+    Vec2D yAxis = bottomLeft - topLeft;
+
+    const float invXAxisLengthSq = 1.0f / xAxis.Mag2();
+    const float invYAxisLengthSq = 1.0f / yAxis.Mag2();
+
+    FillPoly(points, [&](uint32_t px, uint32_t py) {
+        Vec2D p = {static_cast<float>(px), static_cast<float>(py)};
+        Vec2D d = p - topLeft;
+
+        float u = invXAxisLengthSq * d.Dot(xAxis);
+        float v = invYAxisLengthSq * d.Dot(yAxis);
+
+        u = Clamp(u, 0.0f, 1.0f);
+        v = Clamp(v, 0.0f, 1.0f);
+
+        float tx = roundf(u * static_cast<float>(sprite.width));
+        float ty = roundf(v * static_cast<float>(sprite.height));
+
+        Color imageColor = pixels[GetIndex(image.GetWidth(), ty + sprite.yPos, tx + sprite.xPos)];
+        Color newColor = {
+            static_cast<uint8_t>(imageColor.GetRed() * rVal),
+            static_cast<uint8_t>(imageColor.GetGreen() * gVal),
+            static_cast<uint8_t>(imageColor.GetBlue() * bVal),
+            static_cast<uint8_t>(imageColor.GetAlpha() * aVal) };
+
+        return newColor;
+    });
 }
 
 Screen& Screen::operator=(const Screen& screen)
@@ -264,7 +320,7 @@ void Screen::ClearScreen()
     }
 }
 
-void Screen::FillPoly(const std::vector<Vec2D>& points, const Color& color)
+void Screen::FillPoly(const std::vector<Vec2D>& points, FillPolyFunc func)
 {
     if (points.size() > 0)
     {
@@ -344,7 +400,7 @@ void Screen::FillPoly(const std::vector<Vec2D>& points, const Color& color)
 
                     for (int pixelX = int(nodeXVec[k]); pixelX < nodeXVec[k + 1]; ++pixelX)
                     {
-                        Draw(pixelX, pixelY, color);
+                        Draw(pixelX, pixelY, func(pixelX, pixelY));
                     }
                 }
             }

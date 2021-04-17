@@ -14,6 +14,12 @@ App& App::Singleton()
 
 bool App::Init(uint32_t width, uint32_t height, uint32_t mag)
 {
+	if (!mFont.Load("ArcadeFont"))
+	{
+		std::cerr << "Couldn't load ArcadeFont" << std::endl;
+		return false;
+	}
+
 	mnoptrWindow = mScreen.Init(width, height, mag);
 	std::unique_ptr<ArcadeScene> arcadeScene = std::make_unique<ArcadeScene>();
 	PushScene(std::move(arcadeScene));

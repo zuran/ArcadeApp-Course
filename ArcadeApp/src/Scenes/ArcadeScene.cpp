@@ -14,8 +14,6 @@ ArcadeScene::ArcadeScene()
 
 void ArcadeScene::Init()
 {
-	mTempSS.Load("ArcadeFont");
-
 	ButtonAction action;
 	action.key = GameController::ActionKey();
 	action.action = [](uint32_t dt, InputState state)
@@ -49,12 +47,15 @@ void ArcadeScene::Update(uint32_t dt)
 
 void ArcadeScene::Draw(Screen& theScreen)
 {
-	theScreen.Draw(mTempSS, "0", Vec2D::Zero);
+	const BitmapFont& font = App::Singleton().GetFont();
+	AARectangle rect = { Vec2D::Zero, App::Singleton().Width(), App::Singleton().Height() };
+	Vec2D drawPos = font.GetDrawPosition(GetSceneName(), rect, BFXA_CENTER, BFYA_CENTER);
+	theScreen.Draw(font, GetSceneName(), drawPos, Color::Green());
 }
 
 const std::string& ArcadeScene::GetSceneName() const
 {
-	static std::string sceneName = "Arcade Scene";
+	static std::string sceneName = "Arcade";
 	return sceneName;
 }
 

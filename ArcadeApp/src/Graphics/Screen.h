@@ -5,6 +5,7 @@
 #include "Color.h"
 #include <vector>
 #include <string>
+#include <functional>
 
 class Vec2D;
 class Line2D;
@@ -17,6 +18,7 @@ struct SDL_Surface;
 class BmpImage;
 class SpriteSheet;
 struct Sprite;
+class BitmapFont;
 
 class Screen
 {
@@ -40,8 +42,10 @@ public:
 	void Draw(const Triangle& triangle, const Color& color, bool fill = false, const Color& fillColor = Color::White());
 	void Draw(const AARectangle& rect, const Color& color, bool fill = false, const Color& fillColor = Color::White());
 	void Draw(const Circle& circle, const Color& color, bool fill = false, const Color& fillColor = Color::White());
-	void Draw(const BmpImage& image, const Sprite& sprite, const Vec2D& pos);
-	void Draw(const SpriteSheet& ss, const std::string& spriteName, const Vec2D& pos);
+	
+	void Draw(const BmpImage& image, const Sprite& sprite, const Vec2D& pos, const Color& overlayColor = Color::White());
+	void Draw(const SpriteSheet& ss, const std::string& spriteName, const Vec2D& pos, const Color& overlayColor = Color::White());
+	void Draw(const BitmapFont& font, const std::string& textLine, const Vec2D& pos, const Color& overlayColor = Color::White());
 
 private:
 	// Prevent copy
@@ -49,7 +53,10 @@ private:
 	Screen& operator=(const Screen& screen);
 
 	void ClearScreen();
-	void FillPoly(const std::vector<Vec2D>& points, const Color& color);
+
+	using FillPolyFunc = std::function<Color(uint32_t x, uint32_t y)>;
+
+	void FillPoly(const std::vector<Vec2D>& points, FillPolyFunc func);
 
 	uint32_t mWidth;
 	uint32_t mHeight;
