@@ -1,10 +1,2 @@
-﻿  Screen.cpp
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(244,16): warning C4244: 'initializing': conversion from 'float' to 'uint32_t', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(256,46): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(274,35): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(275,40): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(276,48): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(276,38): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(298,83): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Graphics\Screen.cpp(298,65): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+﻿  App.cpp
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
