@@ -1,2 +1,6 @@
-﻿  App.cpp
+﻿  Button.cpp
+  ButtonOptionsScene.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\App\ButtonOptionsScene.cpp(81,49): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\App\ButtonOptionsScene.cpp(81,29): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
+  Generating Code...
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
