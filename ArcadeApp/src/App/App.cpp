@@ -3,8 +3,6 @@
 #include <iostream>
 #include "ArcadeScene.h"
 #include <cassert>
-#include "GameScene.h"
-#include "BreakOut.h"
 
 App& App::Singleton()
 {
@@ -23,13 +21,6 @@ bool App::Init(uint32_t width, uint32_t height, uint32_t mag)
 	mnoptrWindow = mScreen.Init(width, height, mag);
 	std::unique_ptr<ArcadeScene> arcadeScene = std::make_unique<ArcadeScene>();
 	PushScene(std::move(arcadeScene));
-
-	// Temp
-	{
-		std::unique_ptr<BreakOut> breakoutGame = std::make_unique<BreakOut>();
-		std::unique_ptr<GameScene> breakoutScene = std::make_unique<GameScene>(std::move(breakoutGame));
-		PushScene(std::move(breakoutScene));
-	}
 
 	return mnoptrWindow != nullptr;
 }
