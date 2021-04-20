@@ -49,6 +49,7 @@ public:
 	size_t GetNumOverlayColors() const { return mOverlayColors.size(); }
 	size_t GetNumFrameOffsets() const { return mFrameOffsets.size(); }
 
+	static std::vector<Animation> LoadAnimations(const std::string& animationFilePath);
 
 private:
 	std::string mAnimationName;
