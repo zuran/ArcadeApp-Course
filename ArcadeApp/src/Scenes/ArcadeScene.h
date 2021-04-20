@@ -3,6 +3,7 @@
 #include "ButtonOptionsScene.h"
 #include "AnimationPlayer.h"
 #include <memory>
+#include "AnimatedSprite.h"
 
 enum eGame
 {
@@ -27,7 +28,7 @@ public:
 private:
 	std::unique_ptr<Scene> GetScene(eGame game);
 
-	AnimationPlayer mAnimationPlayer;
+	AnimatedSprite mSprite;
 	SpriteSheet mSpriteSheet;
 
 };
