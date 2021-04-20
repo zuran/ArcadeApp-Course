@@ -1,2 +1,8 @@
-﻿  PacmanStartScene.cpp
+﻿  PacmanLevel.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(76,17): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(77,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(82,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(86,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(92,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(101,20): warning C4018: '<': signed/unsigned mismatch
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
