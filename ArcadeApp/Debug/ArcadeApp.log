@@ -1,2 +1,7 @@
-﻿  PacmanGameUtils.cpp
+﻿  Actor.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\Actor.cpp(19,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\Actor.cpp(27,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\Actor.cpp(31,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\Actor.cpp(40,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\Actor.cpp(44,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
