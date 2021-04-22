@@ -1,7 +1,11 @@
-﻿  Actor.cpp
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\Actor.cpp(19,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\Actor.cpp(27,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\Actor.cpp(31,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\Actor.cpp(40,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\Actor.cpp(44,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  PacmanLevel.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(31,73): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(143,17): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(144,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(149,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(153,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(159,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(168,20): warning C4018: '<': signed/unsigned mismatch
+  PacmanStartScene.cpp
+  Generating Code...
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe

@@ -1,14 +1,43 @@
 #include "PacmanLevel.h"
 #include "FileCommandLoader.h"
 #include "Screen.h"
+#include "Pacman.h"
+#include <cassert>
 
-bool PacmanLevel::Init(const std::string& levelPath)
+bool PacmanLevel::Init(const std::string& levelPath, Pacman* noptrPacman)
 {
+	mnoptrPacman = noptrPacman;
 	return LoadLevel(levelPath);
 }
 
 void PacmanLevel::Update(int dt)
 {
+	for (const auto& wall : mWalls)
+	{
+		BoundaryEdge edge;
+
+		if (wall.HasCollided(mnoptrPacman->GetBoundingBox(), edge))
+		{
+			Vec2D offset = wall.GetCollisionOffset(mnoptrPacman->GetBoundingBox());
+			mnoptrPacman->MoveBy(offset);
+			mnoptrPacman->Stop();
+		}
+	}
+
+	for (const Tile& t : mTiles)
+	{
+		if (t.isTeleportTile)
+		{
+			AARectangle teleportTileAABB(t.position, t.width, static_cast<float>(mTileHeight));
+			Tile* teleportToTile = GetTileForSymbol(t.teleportToSymbol);
+			assert(teleportToTile);
+
+			if (teleportToTile->isTeleportTile && teleportTileAABB.Intersects(mnoptrPacman->GetBoundingBox()))
+			{
+				mnoptrPacman->MoveTo(teleportToTile->position + teleportToTile->offset);
+			}
+		}
+	}
 }
 
 void PacmanLevel::Draw(Screen& screen)
@@ -18,6 +47,23 @@ void PacmanLevel::Draw(Screen& screen)
 	{
 		screen.Draw(wall.GetAARectangle(), Color::Blue());
 	}
+}
+
+bool PacmanLevel::WillCollide(const AARectangle& aBBox, PacmanMovement dir) const
+{
+	AARectangle bbox = aBBox;
+	bbox.MoveBy(GetMovementVector(dir));
+
+	for (const auto& wall : mWalls)
+	{
+		BoundaryEdge edge;
+		if (wall.HasCollided(bbox, edge))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 bool PacmanLevel::LoadLevel(const std::string& levelPath)
@@ -67,6 +113,27 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
 		layoutOffset = mLayoutOffset;
 	};
 	fileLoader.AddCommand(layoutOffsetCommand);
+
+	Command tileIsTeleportTileCommand;
+	tileIsTeleportTileCommand.command = "tile_is_teleport_tile";
+	tileIsTeleportTileCommand.parseFunc = [this](ParseFuncParams params) {
+		mTiles.back().isTeleportTile = FileCommandLoader::ReadInt(params);
+	};
+	fileLoader.AddCommand(tileIsTeleportTileCommand);
+
+	Command tileToTeleportToCommand;
+	tileToTeleportToCommand.command = "tile_teleport_to_symbol";
+	tileToTeleportToCommand.parseFunc = [this](ParseFuncParams params) {
+		mTiles.back().teleportToSymbol = FileCommandLoader::ReadChar(params);
+	};
+	fileLoader.AddCommand(tileToTeleportToCommand);
+
+	Command tileOffsetCommand;
+	tileOffsetCommand.command = "tile_offset";
+	tileOffsetCommand.parseFunc = [this](ParseFuncParams params) {
+		mTiles.back().offset = FileCommandLoader::ReadSize(params);
+	};
+	fileLoader.AddCommand(tileOffsetCommand);
 
 	Command layoutCommand;
 	layoutCommand.command = "layout";
