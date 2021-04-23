@@ -2,11 +2,15 @@
 #include "PacmanGameUtils.h"
 #include "App.h"
 
+namespace {
+	const std::string SCORE_STR = "Score   ";
+}
+
 void PacmanGame::Init(GameController& controller)
 {
 	mPacmanSpriteSheet.Load("PacmanSprites");
 	mPacman.Init(mPacmanSpriteSheet, App::Singleton().GetBasePath() + "Assets/Pacman_animations.txt",
-		Vec2D(108, 204), PACMAN_MOVEMENT_SPEED, false);
+		Vec2D::Zero, PACMAN_MOVEMENT_SPEED, false);
 	mLevel.Init(App::Singleton().GetBasePath() + "Assets/Pacman_level.txt", &mPacman);
 
 	ResetGame();
@@ -52,6 +56,18 @@ void PacmanGame::Draw(Screen& screen)
 {
 	mLevel.Draw(screen);
 	mPacman.Draw(screen);
+
+	// Draw Score
+	{
+		Vec2D levelOffset = mLevel.GetLayoutOffset();
+		AARectangle highScoreRect = AARectangle(Vec2D(0, 4), App::Singleton().Width(), levelOffset.GetY());
+		const auto& font = App::Singleton().GetFont();
+		Vec2D textDrawPos;
+		std::string scoreStr = std::to_string(mPacman.GetScore());
+		textDrawPos = font.GetDrawPosition(SCORE_STR + scoreStr, highScoreRect, BFXA_CENTER, BFYA_CENTER);
+
+		screen.Draw(font, SCORE_STR + scoreStr, textDrawPos);
+	}
 }
 
 const std::string& PacmanGame::GetName() const
@@ -64,6 +80,7 @@ void PacmanGame::ResetGame()
 {
 	mPressedDirection = PACMAN_MOVEMENT_NONE;
 	mPacman.ResetScore();
+	mLevel.ResetLevel();
 }
 
 void PacmanGame::UpdatePacmanMovement()
@@ -87,4 +104,8 @@ void PacmanGame::HandleGameControllerState(int dt, InputState state, PacmanMovem
 	{
 		mPressedDirection = PACMAN_MOVEMENT_NONE;
 	}
+}
+
+void PacmanGame::ResetLevel()
+{
 }

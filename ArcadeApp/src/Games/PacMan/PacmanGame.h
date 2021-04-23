@@ -18,6 +18,7 @@ private:
 	void ResetGame();
 	void UpdatePacmanMovement();
 	void HandleGameControllerState(int dt, InputState state, PacmanMovement dir);
+	void ResetLevel();
 
 	PacmanLevel mLevel;
 	PacmanMovement mPressedDirection;

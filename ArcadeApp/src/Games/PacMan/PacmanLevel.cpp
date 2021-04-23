@@ -46,6 +46,24 @@ void PacmanLevel::Update(int dt)
 			}
 		}
 	}
+
+	for (auto& pellet : mPellets)
+	{
+		if (!pellet.eaten)
+		{
+			if (mnoptrPacman->GetEatingBoundingBox().Intersects(pellet.bBox))
+			{
+				pellet.eaten = true;
+				mnoptrPacman->AteItem(pellet.score);
+
+				if (pellet.powerPellet)
+				{
+					mnoptrPacman->ResetGhostEatenMultiplier();
+					//TODO: make ghosts go vulnerable
+				}
+			}
+		}
+	}
 }
 
 void PacmanLevel::Draw(Screen& screen)
@@ -167,6 +185,14 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
 	};
 	fileLoader.AddCommand(tileExcludePelletCommand);
 
+	Command tilePacmanSpawnPointCommand;
+	tilePacmanSpawnPointCommand.command = "tile_pacman_spawn_point";
+	tilePacmanSpawnPointCommand.parseFunc = [this](ParseFuncParams params)
+	{
+		mTiles.back().pacmanSpawnPoint = FileCommandLoader::ReadInt(params);
+	};
+	fileLoader.AddCommand(tilePacmanSpawnPointCommand);
+
 	Command layoutCommand;
 	layoutCommand.command = "layout";
 	layoutCommand.commandType = COMMAND_MULTI_LINE;
@@ -184,6 +210,11 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
 					Excluder wall;
 					wall.Init(AARectangle(Vec2D(startingX, layoutOffset.GetY()), tile->width, static_cast<int>(mTileHeight)));
 					mWalls.push_back(wall);
+				}
+
+				if (tile->pacmanSpawnPoint > 0)
+				{
+					mPacmanSpaceLocation = Vec2D(startingX + tile->offset.GetX(), layoutOffset.GetY() + tile->offset.GetY());
 				}
 
 				if (tile->excludePelletTile > 0)
@@ -216,6 +247,12 @@ PacmanLevel::Tile* PacmanLevel::GetTileForSymbol(char symbol)
 void PacmanLevel::ResetLevel()
 {
 	ResetPellets();
+
+	if (mnoptrPacman)
+	{
+		mnoptrPacman->MoveTo(mPacmanSpaceLocation);
+		mnoptrPacman->ResetToFirstAnimation();
+	}
 }
 
 void PacmanLevel::ResetPellets()
