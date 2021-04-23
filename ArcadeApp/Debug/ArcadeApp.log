@@ -1,11 +1,20 @@
-﻿  PacmanLevel.cpp
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(31,73): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(143,17): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(144,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(149,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(153,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(159,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(168,20): warning C4018: '<': signed/unsigned mismatch
+﻿  PacmanGame.cpp
+  PacmanLevel.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(39,73): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(175,17): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(176,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(181,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(185,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(197,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(206,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(227,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(230,48): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(230,25): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(238,38): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(246,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(246,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(256,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\PacMan\PacmanLevel.cpp(256,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   PacmanStartScene.cpp
   Generating Code...
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
