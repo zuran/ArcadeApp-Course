@@ -4,6 +4,8 @@
 
 namespace {
 	const std::string SCORE_STR = "Score   ";
+	const std::string PACMAN_LIFE_SPRITE_NAME = "pac_man_left_idle";
+	const int MAX_NUM_LIVES = 3;
 }
 
 void PacmanGame::Init(GameController& controller)
@@ -73,6 +75,8 @@ void PacmanGame::Draw(Screen& screen)
 
 		screen.Draw(font, SCORE_STR + scoreStr, textDrawPos);
 	}
+
+	DrawLives(screen);
 }
 
 const std::string& PacmanGame::GetName() const
@@ -83,6 +87,7 @@ const std::string& PacmanGame::GetName() const
 
 void PacmanGame::ResetGame()
 {
+	mNumLives = MAX_NUM_LIVES;
 	mPressedDirection = PACMAN_MOVEMENT_NONE;
 	mPacman.ResetScore();
 	mLevel.ResetToFirstLevel();
@@ -113,4 +118,16 @@ void PacmanGame::HandleGameControllerState(int dt, InputState state, PacmanMovem
 
 void PacmanGame::ResetLevel()
 {
+}
+
+void PacmanGame::DrawLives(Screen& screen)
+{
+	const int X_PAD = 1;
+	auto sprite = mPacmanSpriteSheet.GetSprite(PACMAN_LIFE_SPRITE_NAME);
+	int xPos = X_PAD;
+	for (int i = 0; i < mNumLives; ++i)
+	{
+		screen.Draw(mPacmanSpriteSheet, PACMAN_LIFE_SPRITE_NAME, Vec2D(xPos, App::Singleton().Height() - sprite.height));
+		xPos += sprite.width + X_PAD;
+	}
 }
