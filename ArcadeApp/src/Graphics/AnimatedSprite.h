@@ -4,8 +4,8 @@
 #include "Vec2D.h"
 #include "Color.h"
 #include <string>
+#include "AARectangle.h"
 
-class AARectangle;
 class Screen;
 class SpriteSheet;
 
@@ -23,8 +23,8 @@ public:
 	const AARectangle GetBoundingBox() const;
 
 	inline Vec2D GetPosition() const { return mPosition; }
-	inline void SetPosition(const Vec2D& position) { mPosition = position; }
-	inline void MoveBy(const Vec2D& delta) { mPosition += delta; }
+	inline void SetPosition(const Vec2D& position) { mPosition = position; mBBox.MoveTo(position); }
+	inline void MoveBy(const Vec2D& delta) { mPosition += delta; mBBox.MoveBy(delta); }
 	inline bool IsFinishedPlayingAnimation() const { return mAnimationPlayer.IsFinishedPlaying(); }
 	inline const Color& GetColor() const { return mColor; }
 	const SpriteSheet* GetSpriteSheet() const { return mnoptrSpriteSheet; }
@@ -34,4 +34,6 @@ private:
 	AnimationPlayer mAnimationPlayer;
 	Vec2D mPosition;
 	Color mColor;
+
+	AARectangle mBBox;
 };

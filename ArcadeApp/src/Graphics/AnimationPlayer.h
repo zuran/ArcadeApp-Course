@@ -14,6 +14,7 @@ public:
 	void Stop();
 	void Update(uint32_t dt);
 	AnimationFrame GetCurrentAnimationFrame() const;
+	Size GetAnimationSize() const;
 
 	inline bool IsFinishedPlaying() const { return mIsFinishedPlaying; }
 	inline uint32_t GetCurrentFrameNumber() const { return mFrame; }

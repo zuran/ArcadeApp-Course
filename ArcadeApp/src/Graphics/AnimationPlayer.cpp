@@ -87,3 +87,8 @@ AnimationFrame AnimationPlayer::GetCurrentAnimationFrame() const
 
 	return mAnimations[mCurrentAnimation].GetAnimationFrame(GetCurrentFrameNumber());
 }
+
+Size AnimationPlayer::GetAnimationSize() const
+{
+	return mAnimations[mCurrentAnimation].GetSize();
+}

@@ -30,8 +30,8 @@ public:
 
 	Ghost();
 	virtual void Init(const SpriteSheet& spriteSheet, const std::string& animationsPath, 
-		const Vec2D& initialPos, int movementSpeed, bool updateSpriteOnMovement, const Color& spriteColor = Color::White());
-	virtual void Update(int dt);
+		const Vec2D& initialPos, int movementSpeed, bool updateSpriteOnMovement, const Color& spriteColor = Color::White()) override;
+	virtual void Update(int dt) override;
 
 	void SetStateToVulnerable();
 	virtual void SetMovementDirection(PacmanMovement dir) override;

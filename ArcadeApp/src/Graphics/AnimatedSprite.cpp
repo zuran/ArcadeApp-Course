@@ -11,6 +11,7 @@ void AnimatedSprite::Init(const std::string& animationsPath, const SpriteSheet& 
 	mAnimationPlayer.Init(animationsPath);
 	mnoptrSpriteSheet = &spriteSheet;
 	mColor = color;
+	mBBox = { mPosition, GetSize().width, GetSize().height };
 }
 
 void AnimatedSprite::Update(uint32_t dt)
@@ -30,7 +31,7 @@ void AnimatedSprite::Draw(Screen& theScreen)
 	theScreen.Draw(*mnoptrSpriteSheet, frame.frame, mPosition + frame.offset, frameColor);
 	if (frame.overlay.size() > 0)
 	{
-		theScreen.Draw(*mnoptrSpriteSheet, frame.overlay, mPosition + frame.offset, frame.overlayColor);
+		theScreen.Draw(*mnoptrSpriteSheet, frame.overlay, mPosition, frame.overlayColor);
 	}
 }
 
@@ -41,7 +42,8 @@ void AnimatedSprite::SetAnimation(const std::string& animationName, bool looped)
 
 Size AnimatedSprite::GetSize() const
 {
-	return mAnimationPlayer.GetCurrentAnimationFrame().size;
+	//return mAnimationPlayer.GetCurrentAnimationFrame().size;
+	return mAnimationPlayer.GetAnimationSize();
 }
 
 void AnimatedSprite::Stop()
@@ -51,6 +53,5 @@ void AnimatedSprite::Stop()
 
 const AARectangle AnimatedSprite::GetBoundingBox() const
 {
-	AARectangle bbox = {mPosition, GetSize().width, GetSize().height};
-	return bbox;
+	return mBBox;
 }

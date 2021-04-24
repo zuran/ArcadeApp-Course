@@ -8,7 +8,8 @@ Ghost::Ghost() : mPoints(0), mInitialPos(Vec2D::Zero)
 {
 }
 
-void Ghost::Init(const SpriteSheet& spriteSheet, const std::string& animationsPath, const Vec2D& initialPos, int movementSpeed, bool updateSpriteOnMovement, const Color& spriteColor)
+void Ghost::Init(const SpriteSheet& spriteSheet, const std::string& animationsPath, 
+	const Vec2D& initialPos, int movementSpeed, bool updateSpriteOnMovement, const Color& spriteColor)
 {
 	Actor::Init(spriteSheet, animationsPath, initialPos, movementSpeed, updateSpriteOnMovement, spriteColor);
 	mInitialPos = initialPos;
