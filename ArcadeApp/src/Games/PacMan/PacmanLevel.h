@@ -31,6 +31,7 @@ public:
 	void IncreaseLevel();
 	void ResetToFirstLevel();
 	inline const std::vector<Vec2D>& GetGhostSpawnPoints() { return mGhostSpawnPoints; }
+	inline int GetInGameTextYPos() const { return mBonusItem.bbox.GetTopLeftPoint().GetY(); }
 
 private:
 	struct Tile

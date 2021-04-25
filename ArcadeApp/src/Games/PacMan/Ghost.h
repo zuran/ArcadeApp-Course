@@ -26,7 +26,7 @@ class GhostDelegate
 {
 public:
 	virtual ~GhostDelegate() {}
-	virtual void GhostDelegateGhostStateChangedTo(GhostState lastState, GhostState currentState) = 0;
+	virtual void GhostDelegateGhostStateChangedTo(GhostState lastState, GhostState state) = 0;
 	virtual void GhostDelegateWasReleasedFromPen() = 0;
 	virtual void GhostWasResetToFirstPosition() = 0;
 };
@@ -59,7 +59,7 @@ public:
 	inline void LockCanChangeDirection() { mCanChangeDirection = false; }
 	inline bool CanChangeDirection() const { return mCanChangeDirection; }
 	
-	inline void setGhostDeleate(GhostDelegate& delegate) { mDelegate = &delegate; }
+	inline void SetGhostDelegate(GhostDelegate& delegate) { mDelegate = &delegate; }
 private:
 	void SetGhostState(GhostState state);
 	friend class GhostAI;

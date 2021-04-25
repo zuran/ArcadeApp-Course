@@ -198,14 +198,16 @@ void GhostAI::SetState(GhostAIState state)
 			mTimer = 0;
 			break;
 		case GHOST_AI_STATE_GO_TO_PEN:
+			{
+				Vec2D target = { mGhostPenTarget.GetX() + mnoptrGhost->GetBoundingBox().GetWidth() / 2,
+					mGhostPenTarget.GetY() - mnoptrGhost->GetBoundingBox().GetHeight() / 2 };
+				ChangeTarget(target);
+			}
 			break;
+			
 		case GHOST_AI_STATE_EXIT_PEN:
-		{
-			Vec2D target = { mGhostPenTarget.GetX() + mnoptrGhost->GetBoundingBox().GetWidth()/2,
-							mGhostPenTarget.GetY() - mnoptrGhost->GetBoundingBox().GetHeight()/2};
-			ChangeTarget(target);
+			ChangeTarget(mScatterTarget);
 			break;
-		}
 		case GHOST_AI_STATE_SCATTER:
 			mTimer = 0;
 			ChangeTarget(mScatterTarget);
@@ -238,8 +240,8 @@ Vec2D GhostAI::GetChaseTarget(int dt, const Pacman& pacman, const PacmanLevel& l
 			Vec2D pacmanOffsetPoint = pacman.GetBoundingBox().GetCenterPoint() +
 				(GetMovementVector(pacman.GetMovementDirection()) *
 				pacman.GetBoundingBox().GetWidth());
-			target = (pacmanOffsetPoint - ghosts[BLINKY].GetBoundingBox().GetCenterPoint() * 2 +
-				ghosts[BLINKY].GetBoundingBox().GetCenterPoint());
+			target = (pacmanOffsetPoint - ghosts[BLINKY].GetBoundingBox().GetCenterPoint()) * 2 +
+				ghosts[BLINKY].GetBoundingBox().GetCenterPoint();
 			break;
 		}
 		case CLYDE:

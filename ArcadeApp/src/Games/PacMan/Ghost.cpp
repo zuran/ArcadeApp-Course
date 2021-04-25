@@ -41,7 +41,7 @@ void Ghost::Update(int dt)
 
 void Ghost::SetStateToVulnerable()
 {
-	if (mState != GHOST_STATE_DEAD)
+	if (mState != GHOST_STATE_DEAD && !IsVulnerable())
 	{
 		SetGhostState(GHOST_STATE_VULNERABLE);
 	}
@@ -119,6 +119,8 @@ void Ghost::ResetToFirstPosition()
 
 void Ghost::ReleaseFromPen()
 {
+	mIsReleased = true;
+
 	if (mDelegate)
 	{
 		mDelegate->GhostDelegateWasReleasedFromPen();
