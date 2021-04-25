@@ -22,6 +22,15 @@ enum GhostState
 	GHOST_STATE_DEAD
 };
 
+class GhostDelegate
+{
+public:
+	virtual ~GhostDelegate() {}
+	virtual void GhostDelegateGhostStateChangedTo(GhostState lastState, GhostState currentState) = 0;
+	virtual void GhostDelegateWasReleasedFromPen() = 0;
+	virtual void GhostWasResetToFirstPosition() = 0;
+};
+
 class Ghost : public Actor
 {
 public:
@@ -40,19 +49,26 @@ public:
 	void EatenByPacman();
 	void ResetToFirstPosition();
 
+	void ReleaseFromPen();
+	inline bool IsReleased() const { return mIsReleased; }
+
 	inline bool IsDead() const { return mState == GHOST_STATE_DEAD; }
 	inline bool IsVulnerable() const { return mState == GHOST_STATE_VULNERABLE || mState == GHOST_STATE_VULNERABLE_ENDING; }
 	inline bool IsAlive() const { return mState == GHOST_STATE_ALIVE; }
 	inline int GetPoints() const { return mPoints; }
 	inline void LockCanChangeDirection() { mCanChangeDirection = false; }
 	inline bool CanChangeDirection() const { return mCanChangeDirection; }
-
+	
+	inline void setGhostDeleate(GhostDelegate& delegate) { mDelegate = &delegate; }
 private:
 	void SetGhostState(GhostState state);
+	friend class GhostAI;
 
 	int mVulnerabilityTimer;
 	int mPoints;
 	GhostState mState;
 	bool mCanChangeDirection;
 	Vec2D mInitialPos;
+	bool mIsReleased;
+	GhostDelegate* mDelegate;
 };

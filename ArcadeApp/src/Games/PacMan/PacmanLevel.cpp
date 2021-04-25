@@ -30,7 +30,8 @@ bool PacmanLevel::Init(const std::string& levelPath, const SpriteSheet* noptrSpr
 	return levelLoaded;
 }
 
-void PacmanLevel::Update(int dt, Pacman& pacman, std::vector<Ghost>& ghosts)
+void PacmanLevel::Update(int dt, Pacman& pacman, std::vector<Ghost>& ghosts,
+	std::vector<GhostAI>& ghostAIs)
 {
 	for (const auto& wall : mWalls)
 	{
@@ -48,6 +49,31 @@ void PacmanLevel::Update(int dt, Pacman& pacman, std::vector<Ghost>& ghosts)
 			if (wall.HasCollided(ghost.GetBoundingBox(), edge))
 			{
 				Vec2D offset = wall.GetCollisionOffset(ghost.GetBoundingBox());
+				ghost.MoveBy(offset);
+				ghost.Stop();
+			}
+		}
+	}
+
+	for (const auto& gate : mGate)
+	{
+		BoundaryEdge edge;
+		if (gate.HasCollided(pacman.GetBoundingBox(), edge))
+		{
+			Vec2D offset = gate.GetCollisionOffset(pacman.GetBoundingBox());
+			pacman.MoveBy(offset);
+			pacman.Stop();
+		}
+
+		for (int i = 0; i < NUM_GHOSTS; ++i)
+		{
+			GhostAI& ghostAI = ghostAIs[i];
+			Ghost& ghost = ghosts[i];
+
+			if (!(ghostAI.WantsToLeavePen() || ghostAI.IsEnteringPen()) &&
+				gate.HasCollided(ghost.GetBoundingBox(), edge))
+			{
+				Vec2D offset = gate.GetCollisionOffset(ghost.GetBoundingBox());
 				ghost.MoveBy(offset);
 				ghost.Stop();
 			}
@@ -148,10 +174,43 @@ bool PacmanLevel::WillCollide(const AARectangle& aBBox, PacmanMovement dir) cons
 	AARectangle bbox = aBBox;
 	bbox.MoveBy(GetMovementVector(dir));
 
+	BoundaryEdge edge;
 	for (const auto& wall : mWalls)
 	{
-		BoundaryEdge edge;
 		if (wall.HasCollided(bbox, edge))
+		{
+			return true;
+		}
+	}
+
+	for (const auto& gate : mGate)
+	{
+		if (gate.HasCollided(bbox, edge))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool PacmanLevel::WillCollide(const Ghost& ghost, const GhostAI& ghostAI, PacmanMovement dir) const
+{
+	AARectangle bbox = ghost.GetBoundingBox();
+	bbox.MoveBy(GetMovementVector(dir));
+
+	BoundaryEdge edge;
+	for (const auto& wall : mWalls)
+	{
+		if (wall.HasCollided(bbox, edge))
+		{
+			return true;
+		}
+	}
+
+	for (const auto& gate : mGate)
+	{
+		if (!(ghostAI.IsEnteringPen() || ghostAI.WantsToLeavePen()) && gate.HasCollided(bbox, edge))
 		{
 			return true;
 		}
@@ -285,6 +344,14 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
 	};
 	fileLoader.AddCommand(tileClydeSpawnPointCommand);
 
+	Command tileGateCommand;
+	tileGateCommand.command = "tile_is_gate";
+	tileGateCommand.parseFunc = [this](ParseFuncParams params)
+	{
+		mTiles.back().isGate = FileCommandLoader::ReadInt(params);
+	};
+	fileLoader.AddCommand(tileGateCommand);
+
 
 	Command layoutCommand;
 	layoutCommand.command = "layout";
@@ -298,7 +365,14 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
 			if (tile)
 			{
 				tile->position = Vec2D(startingX, layoutOffset.GetY());
-				if (tile->collidable > 0)
+
+				if (tile->isGate > 0)
+				{
+					Excluder gate;
+					gate.Init(AARectangle(Vec2D(startingX, layoutOffset.GetY()), tile->width, static_cast<int>(mTileHeight)));
+					mGate.push_back(gate);
+				}
+				else if (tile->collidable > 0)
 				{
 					Excluder wall;
 					wall.Init(AARectangle(Vec2D(startingX, layoutOffset.GetY()), tile->width, static_cast<int>(mTileHeight)));

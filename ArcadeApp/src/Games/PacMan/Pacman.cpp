@@ -1,9 +1,9 @@
 #include "Pacman.h"
 #include "Utils.h"
 
-void Pacman::Init(const SpriteSheet& spriteSheet, const std::string& animationPath, const Vec2D& initialPos, int movementSpeed, bool updateSpriteOnMovement)
+void Pacman::Init(const SpriteSheet& spriteSheet, const std::string& animationPath, const Vec2D& initialPos, int movementSpeed, bool updateSpriteOnMovement, const Color& spriteColor)
 {
-	Actor::Init(spriteSheet, animationPath, initialPos, movementSpeed, false);
+	Actor::Init(spriteSheet, animationPath, initialPos, movementSpeed, false, spriteColor);
 	ResetToFirstAnimation();
 	ResetScore();
 	mIsDying = false;

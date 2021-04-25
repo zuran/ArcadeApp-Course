@@ -68,7 +68,7 @@ void PacmanGame::Update(uint32_t dt)
 		mGhosts[i].Update(dt);
 	}
 	
-	mLevel.Update(dt, mPacman, mGhosts);
+	mLevel.Update(dt, mPacman, mGhosts, mGhostAIs);
 
 	if (mLevel.IsLevelOver())
 	{
@@ -171,7 +171,7 @@ void PacmanGame::SetupGhosts()
 	const Vec2D CLYDE_SCATTER_POS = Vec2D(0, App::Singleton().Height());
 
 	mGhosts.resize(NUM_GHOSTS);
-	mGhostAIs.resize(1);
+	mGhostAIs.resize(NUM_GHOSTS);
 
 	Ghost blinky;
 	blinky.Init(mPacmanSpriteSheet, App::Singleton().GetBasePath() + "Assets/Ghost_animations.txt", 
@@ -180,7 +180,8 @@ void PacmanGame::SetupGhosts()
 	mGhosts[BLINKY] = blinky;
 
 	auto blinkyAI = GhostAI();
-	blinkyAI.Init(mGhosts[BLINKY], blinky.GetBoundingBox().GetWidth(), BLINKY_SCATTER_POS, BLINKY);
+	blinkyAI.Init(mGhosts[BLINKY], blinky.GetBoundingBox().GetWidth(), BLINKY_SCATTER_POS, 
+		mLevel.GetGhostSpawnPoints()[BLINKY], mLevel.GetGhostSpawnPoints()[BLINKY], BLINKY);
 
 	mGhostAIs[BLINKY] = blinkyAI;
 
@@ -190,15 +191,30 @@ void PacmanGame::SetupGhosts()
 	inky.SetMovementDirection(PACMAN_MOVEMENT_DOWN);
 	mGhosts[INKY] = inky;
 
+	auto inkyAI = GhostAI();
+	inkyAI.Init(mGhosts[INKY], inky.GetBoundingBox().GetWidth(), INKY_SCATTER_POS,
+		mLevel.GetGhostSpawnPoints()[INKY], mLevel.GetGhostSpawnPoints()[BLINKY], INKY);
+	mGhostAIs[INKY] = inkyAI;
+
 	Ghost pinky;
 	pinky.Init(mPacmanSpriteSheet, App::Singleton().GetBasePath() + "Assets/Ghost_animations.txt",
 		mLevel.GetGhostSpawnPoints()[PINKY], GHOST_MOVEMENT_SPEED, true, Color::Cyan());
 	pinky.SetMovementDirection(PACMAN_MOVEMENT_UP);
 	mGhosts[PINKY] = pinky;
 
+	auto pinkyAI = GhostAI();
+	pinkyAI.Init(mGhosts[PINKY], pinky.GetBoundingBox().GetWidth(), PINKY_SCATTER_POS,
+		mLevel.GetGhostSpawnPoints()[BLINKY], mLevel.GetGhostSpawnPoints()[BLINKY], PINKY);
+	mGhostAIs[PINKY] = pinkyAI;
+
 	Ghost clyde;
 	clyde.Init(mPacmanSpriteSheet, App::Singleton().GetBasePath() + "Assets/Ghost_animations.txt",
 		mLevel.GetGhostSpawnPoints()[CLYDE], GHOST_MOVEMENT_SPEED, true, Color::Orange());
 	clyde.SetMovementDirection(PACMAN_MOVEMENT_UP);
 	mGhosts[CLYDE] = clyde;
+
+	auto clydeAI = GhostAI();
+	clydeAI.Init(mGhosts[CLYDE], clyde.GetBoundingBox().GetWidth(), CLYDE_SCATTER_POS,
+		mLevel.GetGhostSpawnPoints()[BLINKY], mLevel.GetGhostSpawnPoints()[BLINKY], CLYDE);
+	mGhostAIs[CLYDE] = clydeAI;
 }

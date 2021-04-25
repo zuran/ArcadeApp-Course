@@ -4,7 +4,7 @@ namespace {
 	const int NUM_POINTS_FOR_GHOST = 200;
 }
 
-Ghost::Ghost() : mPoints(0), mInitialPos(Vec2D::Zero)
+Ghost::Ghost() : mPoints(0), mInitialPos(Vec2D::Zero), mIsReleased(false), mDelegate(nullptr)
 {
 }
 
@@ -109,10 +109,29 @@ void Ghost::ResetToFirstPosition()
 	mVulnerabilityTimer = 0;
 	SetGhostState(GHOST_STATE_ALIVE);
 	mCanChangeDirection = true;
+	mIsReleased = false;
+
+	if (mDelegate)
+	{
+		mDelegate->GhostWasResetToFirstPosition();
+	}
+}
+
+void Ghost::ReleaseFromPen()
+{
+	if (mDelegate)
+	{
+		mDelegate->GhostDelegateWasReleasedFromPen();
+	}
 }
 
 void Ghost::SetGhostState(GhostState state)
 {
+	if (mDelegate)
+	{
+		mDelegate->GhostDelegateGhostStateChangedTo(mState, state);
+	}
+
 	mState = state;
 
 	switch (mState)
