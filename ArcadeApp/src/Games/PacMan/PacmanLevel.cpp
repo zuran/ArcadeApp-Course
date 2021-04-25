@@ -118,7 +118,11 @@ void PacmanLevel::Update(int dt, Pacman& pacman, std::vector<Ghost>& ghosts,
 				if (pellet.powerPellet)
 				{
 					pacman.ResetGhostEatenMultiplier();
-					//TODO: make ghosts go vulnerable
+					
+					for (auto& ghost : ghosts)
+					{
+						ghost.SetStateToVulnerable();
+					}
 				}
 			}
 		}
@@ -141,11 +145,11 @@ void PacmanLevel::Update(int dt, Pacman& pacman, std::vector<Ghost>& ghosts,
 
 void PacmanLevel::Draw(Screen& screen)
 {
-	// Debug for walls
-	for (const auto& wall : mWalls)
-	{
-		screen.Draw(wall.GetAARectangle(), Color::Blue());
-	}
+	Sprite bgSprite;
+	bgSprite.width = mBGImage.GetWidth();
+	bgSprite.height = mBGImage.GetHeight();
+
+	screen.Draw(mBGImage, bgSprite, Vec2D::Zero);
 
 	for (const auto& pellet : mPellets)
 	{
@@ -223,6 +227,18 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
 {
 	FileCommandLoader fileLoader;
 	
+	std::string bgImageName;
+
+	Command bgImageCommand;
+	bgImageCommand.command = "bg_image";
+	bgImageCommand.parseFunc = [this, &bgImageName](ParseFuncParams params) {
+		bgImageName = FileCommandLoader::ReadString(params);
+		bool loaded = mBGImage.Load(App::Singleton().GetBasePath() + std::string("Assets/") + bgImageName);
+
+		assert(loaded && "Couldn't load background image");
+	};
+	fileLoader.AddCommand(bgImageCommand);
+
 	Command tileWidthCommand;
 	tileWidthCommand.command = "tile_width";
 	tileWidthCommand.parseFunc = [this](ParseFuncParams params) {
@@ -390,7 +406,7 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
 				}
 				else if (tile->blinkySpawnPoint > 0)
 				{
-					mGhostSpawnPoints[BLINKY] = Vec2D(startingX + tile->offset.GetX() + 1, layoutOffset.GetY() + tile->offset.GetY());
+					mGhostSpawnPoints[BLINKY] = Vec2D(startingX + tile->offset.GetX() + 5, layoutOffset.GetY() + tile->offset.GetY());
 				}
 				else if (tile->pinkySpawnPoint > 0)
 				{

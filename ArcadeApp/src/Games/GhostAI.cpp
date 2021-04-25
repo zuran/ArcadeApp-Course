@@ -169,6 +169,14 @@ void GhostAI::GhostDelegateGhostStateChangedTo(GhostState lastState, GhostState 
 	{
 		SetState(GHOST_AI_STATE_GO_TO_PEN);
 	}
+	else if ((lastState == GHOST_STATE_VULNERABLE || lastState == GHOST_STATE_VULNERABLE_ENDING) &&
+		state == GHOST_STATE_ALIVE)
+	{
+		if (mState == GHOST_AI_STATE_CHASE || mState == GHOST_AI_STATE_SCATTER)
+		{
+			SetState(mLastState);
+		}
+	}
 }
 
 void GhostAI::GhostDelegateWasReleasedFromPen()
@@ -204,9 +212,8 @@ void GhostAI::SetState(GhostAIState state)
 				ChangeTarget(target);
 			}
 			break;
-			
 		case GHOST_AI_STATE_EXIT_PEN:
-			ChangeTarget(mScatterTarget);
+			ChangeTarget(mGhostExitPenPosition);
 			break;
 		case GHOST_AI_STATE_SCATTER:
 			mTimer = 0;

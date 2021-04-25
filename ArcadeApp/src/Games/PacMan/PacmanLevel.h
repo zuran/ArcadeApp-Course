@@ -8,6 +8,7 @@
 #include "SpriteSheet.h"
 #include "GhostAI.h"
 #include <random>
+#include "BmpImage.h"
 
 class Screen;
 class Pacman;
@@ -86,7 +87,8 @@ private:
 	void GetBonusItemSpriteName(std::string& spriteName, int& score) const;
 	void SpawnBonusItem();
 	bool ShouldSpawnBonusItem() const;
-	
+
+	BmpImage mBGImage;	
 	std::vector<Vec2D> mGhostSpawnPoints;
 	std::default_random_engine mGenerator;
 	BonusItem mBonusItem;

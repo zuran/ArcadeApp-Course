@@ -54,6 +54,17 @@ void PacmanGame::Init(GameController& controller)
 	controller.AddInputActionForKey(rightAction);
 	controller.AddInputActionForKey(upAction);
 	controller.AddInputActionForKey(downAction);
+
+	ButtonAction backAction;
+	backAction.key = GameController::CancelKey();
+	backAction.action = [this](uint32_t dt, InputState state)
+	{
+		if (mGameState == GAME_OVER && GameController::IsPressed(state))
+		{
+			App::Singleton().PopScene();
+		}
+	};
+	controller.AddInputActionForKey(backAction);
 }
 
 void PacmanGame::Update(uint32_t dt)
@@ -100,6 +111,21 @@ void PacmanGame::Update(uint32_t dt)
 			}
 
 			ghost.Update(dt);
+
+			if (ghost.IsVulnerable() && mPacman.GetEatingBoundingBox().Intersects(ghost.GetBoundingBox()))
+			{
+				ghost.EatenByPacman();
+				mPacman.AteGhost(ghost.GetPoints());
+			}
+			else if (ghost.IsAlive() && ghost.GetEatingBoundingBox().Intersects(mPacman.GetBoundingBox()))
+			{
+				--mNumLives;
+				mGameState = LOST_LIFE;
+				mPacman.EatenByGhost();
+				mPressedDirection = PACMAN_MOVEMENT_NONE;
+				mPacman.SetMovementDirection(PACMAN_MOVEMENT_NONE);
+				return;
+			}
 		}
 	
 		mLevel.Update(dt, mPacman, mGhosts, mGhostAIs);
@@ -137,10 +163,10 @@ void PacmanGame::Draw(Screen& screen)
 		ghost.Draw(screen);
 	}
 
-	for (auto& ghostAI : mGhostAIs)
+	/*for (auto& ghostAI : mGhostAIs)
 	{
 		ghostAI.Draw(screen);
-	}
+	}*/
 
 	const auto& font = App::Singleton().GetFont();
 	Vec2D textDrawPos;
