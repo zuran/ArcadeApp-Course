@@ -58,8 +58,8 @@ void PacmanGame::Update(uint32_t dt)
 		if (static_cast<GhostName>(i) == BLINKY)
 		{
 			GhostAI& ghostAI = mGhostAIs[i];
-			auto dir = ghostAI.Update(dt, mLevel);
-			if (dir != mGhosts[i].GetMovementDirection())
+			auto dir = ghostAI.Update(dt, mPacman, mLevel, mGhosts);
+			if (mGhosts[i].CanChangeDirection() && dir != mGhosts[i].GetMovementDirection())
 			{
 				mGhosts[i].SetMovementDirection(dir);
 			}
@@ -165,6 +165,11 @@ void PacmanGame::DrawLives(Screen& screen)
 
 void PacmanGame::SetupGhosts()
 {
+	const Vec2D BLINKY_SCATTER_POS = Vec2D(App::Singleton().Width() - 24, 0);
+	const Vec2D INKY_SCATTER_POS = Vec2D(App::Singleton().Width(), App::Singleton().Height());
+	const Vec2D PINKY_SCATTER_POS = Vec2D(24, 0);
+	const Vec2D CLYDE_SCATTER_POS = Vec2D(0, App::Singleton().Height());
+
 	mGhosts.resize(NUM_GHOSTS);
 	mGhostAIs.resize(1);
 
@@ -175,7 +180,7 @@ void PacmanGame::SetupGhosts()
 	mGhosts[BLINKY] = blinky;
 
 	auto blinkyAI = GhostAI();
-	blinkyAI.Init(mGhosts[BLINKY], BLINKY);
+	blinkyAI.Init(mGhosts[BLINKY], blinky.GetBoundingBox().GetWidth(), BLINKY_SCATTER_POS, BLINKY);
 
 	mGhostAIs[BLINKY] = blinkyAI;
 

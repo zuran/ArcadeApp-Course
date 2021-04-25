@@ -45,6 +45,7 @@ public:
 	inline bool IsAlive() const { return mState == GHOST_STATE_ALIVE; }
 	inline int GetPoints() const { return mPoints; }
 	inline void LockCanChangeDirection() { mCanChangeDirection = false; }
+	inline bool CanChangeDirection() const { return mCanChangeDirection; }
 
 private:
 	void SetGhostState(GhostState state);

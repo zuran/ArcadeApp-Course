@@ -1,2 +1,4 @@
 ﻿  GhostAI.cpp
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\GhostAI.cpp(94,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stephen\source\repos\ArcadeApp\ArcadeApp\src\Games\GhostAI.cpp(98,25): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   ArcadeApp.vcxproj -> C:\Users\Stephen\source\repos\ArcadeApp\Debug\ArcadeApp.exe
